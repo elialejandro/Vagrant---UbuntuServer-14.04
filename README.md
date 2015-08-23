@@ -22,3 +22,5 @@ config.vm.network "forwarded_port", guest: 80, host: 80
 # MySQL
 config.vm.network "forwarded_port", guest: 3306, host: 3306
 ```
+
+Podran ver lo que ejecuten en el servidor en: http://localhost/
