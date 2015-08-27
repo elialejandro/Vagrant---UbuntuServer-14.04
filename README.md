@@ -24,3 +24,15 @@ config.vm.network "forwarded_port", guest: 3306, host: 3306
 ```
 
 Podran ver lo que ejecuten en el servidor en: http://localhost/
+
+### Z-Ray
+Es una herramienta para desarrollo que proporsiona información detallada de lo que se ha ejecutado.
+Para accesar a z-ray: http://192.168.56.115:10081
+
+```ruby
+# Z-Ray
+config.vm.network "forwarded_port", guest: 10081, host: 10081
+```
+Para usar localhost: http://localhost:10081
+
+![Z-Ray](z-ray.png)
