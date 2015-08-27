@@ -55,6 +55,18 @@ sed -i "s/bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" ${mysql_config_f
 echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION" | mysql -u root --password=root
 echo "GRANT PROXY ON ''@'' TO 'root'@'%' WITH GRANT OPTION" | mysql -u root --password=root
 
+# Install Z-Ray
+wget http://downloads.zend.com/zray/1208/zray-php5.5-Ubuntu-14.04-x86_64.tar.gz
+tar xvfz zray-php5.5-Ubuntu-14.04-x86_64.tar.gz -C /opt
+cp /opt/zray/zray-ui.conf /etc/apache2/sites-available
+a2ensite zray-ui.conf
+a2enmod rewrite
+
+ln -sf /opt/zray/zray.ini /etc/php5/apache2/conf.d/zray.ini
+ln -sf /opt/zray/zray.ini /etc/php5/cli/conf.d/zray.ini
+ln -sf /opt/zray/lib/zray.so /usr/lib/php5/20121212/zray.so # Ubuntu 14.04
+chown -R www-data:www-data /opt/zray
+
 # Restart Services
 service apache2 restart
 service mysql restart
