@@ -67,6 +67,14 @@ ln -sf /opt/zray/zray.ini /etc/php5/cli/conf.d/zray.ini
 ln -sf /opt/zray/lib/zray.so /usr/lib/php5/20121212/zray.so # Ubuntu 14.04
 chown -R www-data:www-data /opt/zray
 
+# Install phpmyadmin
+echo 'phpmyadmin phpmyadmin/dbconfig-install boolean true' | debconf-set-selections
+echo 'phpmyadmin phpmyadmin/app-password-confirm password root' | debconf-set-selections
+echo 'phpmyadmin phpmyadmin/mysql/admin-pass password root' | debconf-set-selections
+echo 'phpmyadmin phpmyadmin/mysql/app-pass password root' | debconf-set-selections
+echo 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2' | debconf-set-selections
+apt-get install -q -y phpmyadmin
+
 # Restart Services
 service apache2 restart
 service mysql restart
