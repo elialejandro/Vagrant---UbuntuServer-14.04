@@ -56,8 +56,9 @@ echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT 
 echo "GRANT PROXY ON ''@'' TO 'root'@'%' WITH GRANT OPTION" | mysql -u root --password=root
 
 # Install Z-Ray
-wget http://downloads.zend.com/zray/1208/zray-php5.5-Ubuntu-14.04-x86_64.tar.gz
-tar xvfz zray-php5.5-Ubuntu-14.04-x86_64.tar.gz -C /opt
+wget http://downloads.zend.com/zray/2010/zray-php-101832-php5.5.27-linux-debian7-amd64.tar.gz
+tar xvfz zray-php-101832-php5.5.27-linux-debian7-amd64.tar.gz -C /opt
+mv /opt/zray-php-101832-php5.5.27-linux-debian7-amd64/zray /opt/zray
 cp /opt/zray/zray-ui.conf /etc/apache2/sites-available
 a2ensite zray-ui.conf
 a2enmod rewrite
@@ -66,6 +67,7 @@ ln -sf /opt/zray/zray.ini /etc/php5/apache2/conf.d/zray.ini
 ln -sf /opt/zray/zray.ini /etc/php5/cli/conf.d/zray.ini
 ln -sf /opt/zray/lib/zray.so /usr/lib/php5/20121212/zray.so # Ubuntu 14.04
 chown -R www-data:www-data /opt/zray
+chmod -R 777 /opt/zray
 
 # Install phpmyadmin
 echo 'phpmyadmin phpmyadmin/dbconfig-install boolean true' | debconf-set-selections
